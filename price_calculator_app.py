@@ -15,7 +15,7 @@ formatted_square_footage = f"{square_footage:,}"
 st.write(f"Square Footage Entered: {formatted_square_footage} sq. ft.")
 
 # Calculation: Squares
-squares = square_footage // 100  # Whole number division
+squares = square_footage // 10  # Whole number division
 st.write(f"Calculated Squares: {squares}")
 
 # Input: Dealer Margin
@@ -36,7 +36,7 @@ flat_costs = trim_cost + patch_cost
 
 # Cost Calculations
 base_cost_per_square = 800.0  # Base cost per square
-total_square_cost = squares * (base_cost_per_square + dealer_margin)//10
+total_square_cost = squares * (base_cost_per_square + dealer_margin)
 final_total_cost = total_square_cost + flat_costs
 
 # Display Costs
