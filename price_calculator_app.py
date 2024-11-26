@@ -15,7 +15,7 @@ formatted_square_footage = f"{square_footage:,}"
 st.write(f"Square Footage Entered: {formatted_square_footage} sq. ft.")
 
 # Calculation: Squares
-squares = square_footage // 10  # Whole number division
+squares = square_footage // 1000  # Whole number division
 st.write(f"Calculated Squares: {squares}")
 
 # Input: Dealer Margin
