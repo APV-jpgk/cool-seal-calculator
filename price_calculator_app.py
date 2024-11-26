@@ -36,7 +36,7 @@ flat_costs = trim_cost + patch_cost
 
 # Cost Calculations
 base_cost_per_square = 800.0  # Base cost per square
-total_square_cost = squares * (base_cost_per_square + dealer_margin)//100
+total_square_cost = squares * (base_cost_per_square + dealer_margin)//10
 final_total_cost = total_square_cost + flat_costs
 
 # Display Costs
