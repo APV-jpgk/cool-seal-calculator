@@ -42,6 +42,7 @@ with custom_col:
     )
 
 # Convert selected margin back to numeric value
+st.subheader("Dealer Margin")
 dealer_margin = float(custom_margin) if custom_margin.strip() else float(preset_margin.strip("$").replace(",", ""))
 
 # Fixed Flat Costs
