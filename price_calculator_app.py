@@ -25,7 +25,7 @@ squares = square_footage // 1000  # Each square is 1000 sq ft
 st.write(f"Calculated Squares: {squares}")
 
 # Input: Dealer Margin
-st.write("**Dealer Margin**")
+st.subheader("**Dealer Margin**")
 preset_col, custom_col = st.columns([1, 2])
 
 with preset_col:
@@ -42,7 +42,6 @@ with custom_col:
     )
 
 # Convert selected margin back to numeric value
-st.subheader("Dealer Margin")
 dealer_margin = float(custom_margin) if custom_margin.strip() else float(preset_margin.strip("$").replace(",", ""))
 
 # Fixed Flat Costs
