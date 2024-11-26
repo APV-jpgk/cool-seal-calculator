@@ -58,6 +58,7 @@ final_project_cost = squares * (base_cost_per_square + dealer_margin) + flat_cos
 st.subheader("Cost Breakdown")
 
 # Proper Alignment with Columns
+# Bold titles
 rows = [
     ("Base Cost per Square:", f"${base_cost_per_square:,.2f}"),
     ("Dealer Margin per Square:", f"${dealer_margin:,.2f}"),
