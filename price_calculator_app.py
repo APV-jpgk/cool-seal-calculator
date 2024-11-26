@@ -1,75 +1,61 @@
 import streamlit as st
 
-# Title and Introduction
-st.title("Cool Seal Heat Reflective Wall Coating Price Calculator")
-st.markdown("""
-This app calculates the total cost for Cool Seal wall coating based on input square footage, 
-dealer margin, and additional flat job costs. Adjust the values below to get started!
-""")
+# Set page layout for responsiveness
+st.set_page_config(layout="centered")
 
-# Input: Square Footage
-square_footage = st.number_input(
-    "Enter Square Footage of Walls:",
-    min_value=0,
-    step=1,
-    format="%d",
-    value=0  # Default to blank
-)
+# Title Section
+st.title("Cost Breakdown Calculator")
 
-# Format Square Footage for Display
-formatted_square_footage = f"{square_footage:,}"
-st.write(f"Square Footage Entered: {formatted_square_footage} sq. ft.")
+# Custom Margin Input
+custom_margin = st.number_input("Custom Margin ($):", min_value=0.0, value=0.0, step=1.0)
+formatted_margin = f"${custom_margin:,.2f}"  # Format as currency
 
-# Calculation: Squares
-squares = square_footage // 1000  # Each square is 1000 sq ft
-st.write(f"Calculated Squares: {squares}")
+# Display Cost Breakdown
+st.markdown("### **Cost Breakdown**")
 
-# Input: Dealer Margin
-st.write("**Dealer Margin**")
-preset_col, custom_col = st.columns([1, 2])
+# Base Costs and Other Values
+base_cost = 800.00
+dealer_margin = 0.00
+flat_costs = 500.00
+dealer_profit = 0.00
+final_project_cost = 500.00
 
-with preset_col:
-    preset_margin = st.selectbox(
-        "Select Margin:",
-        [f"${x:,.2f}" for x in range(0, 1100, 100)],
-        index=0,
-        format_func=lambda x: x
-    )
-with custom_col:
-    custom_margin = st.text_input(
-        "Custom Margin ($):",
-        value="0.00"
-    )
+# Use Columns for Neat Alignment
+# Base Cost
+col1, col2 = st.columns([2, 1])
+with col1:
+    st.write("Base Cost per Square:")
+with col2:
+    st.write(f"${base_cost:,.2f}")
 
-# Convert selected margin back to numeric value
-dealer_margin = float(custom_margin) if custom_margin.strip() else float(preset_margin.strip("$").replace(",", ""))
-
-# Fixed Flat Costs
-trim_cost = 250.0
-patch_cost = 250.0
-flat_costs = trim_cost + patch_cost
-
-# Cost Calculations
-base_cost_per_square = 800.0  # Base cost per square
-total_dealer_profit = squares * dealer_margin  # Total dealer profit calculation
-final_project_cost = squares * (base_cost_per_square + dealer_margin) + flat_costs
-
-# Display Costs in Table Format
-st.subheader("Cost Breakdown")
-
-# Responsive Table
-cost_col1, cost_col2 = st.columns(2)
-
-with cost_col1:
-    st.write("**Base Cost per Square:**")
-    st.write("**Dealer Margin per Square:**")
-    st.write("**Flat Costs (Trim + Patch):**")
-    st.write("**Total Dealer Profit:**")
-    st.write("**Final Project Cost:**")
-
-with cost_col2:
-    st.write(f"${base_cost_per_square:,.2f}")
+# Dealer Margin
+col1, col2 = st.columns([2, 1])
+with col1:
+    st.write("Dealer Margin per Square:")
+with col2:
     st.write(f"${dealer_margin:,.2f}")
+
+# Flat Costs
+col1, col2 = st.columns([2, 1])
+with col1:
+    st.write("Flat Costs (Trim + Patch):")
+with col2:
     st.write(f"${flat_costs:,.2f}")
-    st.write(f"${total_dealer_profit:,.2f}")
+
+# Dealer Profit
+col1, col2 = st.columns([2, 1])
+with col1:
+    st.write("Total Dealer Profit:")
+with col2:
+    st.write(f"${dealer_profit:,.2f}")
+
+# Final Project Cost
+col1, col2 = st.columns([2, 1])
+with col1:
+    st.write("Final Project Cost:")
+with col2:
     st.write(f"${final_project_cost:,.2f}")
+
+# Display Custom Margin
+st.markdown("### **Custom Margin Applied**")
+st.write(f"Custom Margin: {formatted_margin}")
