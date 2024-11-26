@@ -1,9 +1,9 @@
 import streamlit as st
 
 # Title and Introduction
-st.title("Cool Seal Heat Reflective Wall Coating - Dealer Price Calculator")
+st.title("Wall Coating Price Calculator")
 st.markdown("""
-This app calculates the total cost for Cool Seal wall coating based on input square footage, 
+This app calculates the total cost for wall coating based on input square footage, 
 dealer margin, and additional flat job costs. Adjust the values below to get started!
 """)
 
