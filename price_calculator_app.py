@@ -8,7 +8,13 @@ dealer margin, and additional flat job costs. Adjust the values below to get sta
 """)
 
 # Input: Square Footage
-square_footage = st.number_input("Enter Square Footage of Walls:", min_value=0, step=1, format="%d")
+square_footage = st.number_input(
+    "Enter Square Footage of Walls:",
+    min_value=0,
+    step=1,
+    format="%d",
+    value=0  # Default to blank
+)
 
 # Format Square Footage for Display
 formatted_square_footage = f"{square_footage:,}"
@@ -19,18 +25,24 @@ squares = square_footage // 1000  # Each square is 1000 sq ft
 st.write(f"Calculated Squares: {squares}")
 
 # Input: Dealer Margin
-col1, col2 = st.columns([1, 3])  # Narrow the dropdown column
-with col1:
+st.write("**Dealer Margin**")
+preset_col, custom_col = st.columns([1, 2])
+
+with preset_col:
     preset_margin = st.selectbox(
-        "Dealer Margin:", 
-        [f"${x}" for x in range(0, 1100, 100)], 
-        index=0
+        "Select Margin:",
+        [f"${x:,.2f}" for x in range(0, 1100, 100)],
+        index=0,
+        format_func=lambda x: x
     )
-with col2:
-    custom_margin = st.number_input("Custom Dealer Margin ($):", min_value=0, step=1)
+with custom_col:
+    custom_margin = st.text_input(
+        "Custom Margin ($):",
+        value="0.00"
+    )
 
 # Convert selected margin back to numeric value
-dealer_margin = custom_margin if custom_margin > 0 else int(preset_margin.strip("$"))
+dealer_margin = float(custom_margin) if custom_margin.strip() else float(preset_margin.strip("$").replace(",", ""))
 
 # Fixed Flat Costs
 trim_cost = 250.0
@@ -44,6 +56,8 @@ final_project_cost = squares * (base_cost_per_square + dealer_margin) + flat_cos
 
 # Display Costs in Table Format
 st.subheader("Cost Breakdown")
+
+# Responsive Table
 cost_col1, cost_col2 = st.columns(2)
 
 with cost_col1:
@@ -54,8 +68,8 @@ with cost_col1:
     st.write("**Final Project Cost:**")
 
 with cost_col2:
-    st.write(f"${base_cost_per_square:.2f}")
-    st.write(f"${dealer_margin:.2f}")
-    st.write(f"${flat_costs:.2f}")
+    st.write(f"${base_cost_per_square:,.2f}")
+    st.write(f"${dealer_margin:,.2f}")
+    st.write(f"${flat_costs:,.2f}")
     st.write(f"${total_dealer_profit:,.2f}")
     st.write(f"${final_project_cost:,.2f}")
