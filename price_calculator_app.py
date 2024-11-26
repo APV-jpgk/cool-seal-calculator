@@ -1,4 +1,3 @@
-
 import streamlit as st
 
 # Title and Introduction
@@ -31,14 +30,17 @@ trim_cost = 250.0
 patch_cost = 250.0
 
 # Cost Calculations
-cost_per_square = 800.0  # Example cost per square
-total_square_cost = squares * cost_per_square
+base_cost_per_square = 800.0  # Base cost per square
+dealer_cost_per_square = base_cost_per_square + dealer_margin
+total_square_cost = dealer_cost_per_square * squares
 flat_costs = trim_cost + patch_cost
-total_cost = total_square_cost + flat_costs + dealer_margin
+final_total_cost = total_square_cost + flat_costs
 
 # Display Costs
 st.subheader("Cost Breakdown")
+st.write(f"Base Cost per Square: ${base_cost_per_square:.2f}")
+st.write(f"Dealer Cost per Square (with Margin): ${dealer_cost_per_square:.2f}")
 st.write(f"Total Cost for Squares: ${total_square_cost:.2f}")
 st.write(f"Flat Costs (Trim + Patch): ${flat_costs:.2f}")
-st.write(f"Dealer Margin: ${dealer_margin:.2f}")
-st.write(f"**Total Cost: ${total_cost:.2f}**")
+st.write(f"**Final Total Cost: ${final_total_cost:.2f}**")
+
