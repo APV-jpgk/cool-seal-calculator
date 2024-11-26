@@ -54,22 +54,22 @@ base_cost_per_square = 800.0  # Base cost per square
 total_dealer_profit = squares * dealer_margin  # Total dealer profit calculation
 final_project_cost = squares * (base_cost_per_square + dealer_margin) + flat_costs
 
-# Display Costs in Table Format
+# Display Costs in Aligned Table Format
 st.subheader("Cost Breakdown")
 
-# Responsive Table
-cost_col1, cost_col2 = st.columns(2)
+# Proper Alignment with Columns
+rows = [
+    ("Base Cost per Square:", f"${base_cost_per_square:,.2f}"),
+    ("Dealer Margin per Square:", f"${dealer_margin:,.2f}"),
+    ("Flat Costs (Trim + Patch):", f"${flat_costs:,.2f}"),
+    ("Total Dealer Profit:", f"${total_dealer_profit:,.2f}"),
+    ("Final Project Cost:", f"${final_project_cost:,.2f}"),
+]
 
-with cost_col1:
-    st.write("**Base Cost per Square:**")
-    st.write("**Dealer Margin per Square:**")
-    st.write("**Flat Costs (Trim + Patch):**")
-    st.write("**Total Dealer Profit:**")
-    st.write("**Final Project Cost:**")
-
-with cost_col2:
-    st.write(f"${base_cost_per_square:,.2f}")
-    st.write(f"${dealer_margin:,.2f}")
-    st.write(f"${flat_costs:,.2f}")
-    st.write(f"${total_dealer_profit:,.2f}")
-    st.write(f"${final_project_cost:,.2f}")
+# Render each row as two columns for mobile responsiveness
+for title, value in rows:
+    col1, col2 = st.columns([2, 1])
+    with col1:
+        st.write(title)
+    with col2:
+        st.write(value)
